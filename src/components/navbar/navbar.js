@@ -17,7 +17,7 @@ const NavBar = () => {
         <Section>
             <Img src="/assets/logo-pokemon.png" alt="Logo do Pokemon"/>
             <Select name="select">
-                <Option value="none">Filter by Type</Option>
+                <Option value="all">Filter by Type</Option>
                 {types.map((type, index)=> {
                     return (
                         <Option key={index} value={type.name}>{type.name}</Option>
