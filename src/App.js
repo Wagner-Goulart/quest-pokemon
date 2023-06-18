@@ -1,14 +1,11 @@
-import { Cards } from "./components/cards/cards";
-import { Home } from "./pages/home";
 import { createGlobalStyle} from "styled-components";
+import { AppRoutes } from "./pages/routes";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <Home />
-      <Cards />
-     
+      <AppRoutes />
     </>
    
   );
@@ -24,6 +21,11 @@ const GlobalStyles = createGlobalStyle`
 
   ul {
     list-style: none;
+    color: #000;
+  }
+
+  a {
+    text-decoration: none;
   }
 `
 

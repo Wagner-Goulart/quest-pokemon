@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { Card } from "../card/card"
 import { styled } from "styled-components"
+import { Link } from "react-router-dom"
+
 
 
 const randomNums = (max) => {
@@ -27,26 +29,26 @@ const Cards = () => {
 
         fetchData()
     }, [])
-    
-    console.log(pokemons)
 
     return (
         <Section>
             <Ul>
                 {pokemons.map((pokemon, index) => {
                     return (
-                        <Card key={index}>
-                            <Img src={pokemon.data.sprites.front_default} alt={pokemon.data.name}/>
-                            <P  value={pokemon.data.name}>{pokemon.data.name}</P>
-                        </Card>
+                        <Link to = {`/pokemon-details/${ pokemon.data.id }`}>
+                            <Card key={index} >
+                                <Img src={pokemon.data.sprites.front_default} alt={pokemon.data.name} />
+                                <P value={pokemon.data.name}>{pokemon.data.name}</P>
+                            </Card>
+                        </Link>
                     )
                 })}
             </Ul>
-        </Section>
+        </Section >
     )
 }
 
-const Section = styled('section') `
+const Section = styled('section')`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,11 +68,11 @@ const Ul = styled('ul')`
     padding: 1rem;
     border-radius: 5px;
 `
-const Img = styled('img') `
+const Img = styled('img')`
     width: 100px;
     height: 100px;
 `
-const P = styled('p') `
+const P = styled('p')`
     font-weight: bolder;
     text-transform: capitalize;
     font-size: 1.2rem;
