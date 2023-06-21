@@ -1,29 +1,34 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import {useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
 
-const NavBar = () => {
+const NavBar = ({ hideSelect }) => {
 
     const [types, setTypes] = useState([])
 
-    useEffect(()=> {
+    const navigate = useNavigate()
+
+    useEffect(() => {
         axios.get('https://pokeapi.co/api/v2/type/')
-            .then((types)=> {
+            .then((types) => {
                 setTypes(types.data.results)
             })
     }, [])
 
     return (
         <Section>
-            <Img src="/assets/logo-pokemon.png" alt="Logo do Pokemon"/>
-            <Select name="select">
-                <Option value="all">Filter by Type</Option>
-                {types.map((type, index)=> {
-                    return (
-                        <Option key={index} value={type.name}>{type.name}</Option>
-                    )
-                })}
-            </Select>
+                <Img src="/assets/logo-pokemon.png" alt="Logo do Pokemon" onClick={()=> navigate("/")}/>
+            {!hideSelect && (
+                <Select name="select">
+                    <Option value="all">Filter by Type</Option>
+                    {types.map((type, index) => {
+                        return (
+                            <Option key={index} value={type.name}>{type.name}</Option>
+                        )
+                    })}
+                </Select>
+            )}
         </Section>
     )
 }
@@ -39,6 +44,7 @@ const Section = styled.section`
 
 const Img = styled.img`
     width: 70px;
+    cursor: pointer;
     
 `
 const Select = styled.select`
@@ -50,7 +56,7 @@ const Select = styled.select`
    cursor: pointer;
  `
 
- const Option = styled.option`
+const Option = styled.option`
    text-transform: capitalize;
    color: #000;
 `

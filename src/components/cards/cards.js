@@ -5,7 +5,6 @@ import { styled } from "styled-components"
 import { Link } from "react-router-dom"
 
 
-
 const randomNums = (max) => {
     return Math.floor(Math.random() * max + 1)
 }
@@ -35,7 +34,7 @@ const Cards = () => {
             <Ul>
                 {pokemons.map((pokemon, index) => {
                     return (
-                        <Link to = {`/pokemon-details/${ pokemon.data.id }`}>
+                        <Link to={`/pokemon-details/${pokemon.data.id}`}>
                             <Card key={index} >
                                 <Img src={pokemon.data.sprites.front_default} alt={pokemon.data.name} />
                                 <P value={pokemon.data.name}>{pokemon.data.name}</P>
@@ -78,7 +77,5 @@ const P = styled('p')`
     font-size: 1.2rem;
 
 `
-
-
 
 export { Cards }
