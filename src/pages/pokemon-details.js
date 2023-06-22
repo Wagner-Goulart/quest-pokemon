@@ -14,7 +14,6 @@ const PokemonDetails = () => {
     const { id } = useParams()
 
 
-
     useEffect(() => {
         function fetchData() {
 
@@ -74,14 +73,24 @@ const PokemonDetails = () => {
                             {details.sprites && (
                                 <Img src={details.sprites.front_default} alt="Pokemon Sprite" />
                             )}
+
                             {details.name && <h2>{details.name}</h2>}
+
+                            {details.types && details.types.length > 1 ? (
+                                <span>{details.types[0].type.name} | {details.types[1].type.name}</span>
+                            ) : (
+                                <span>{details.types && details.types[0].type.name}</span>
+                            )}
+
                         </div>
                         <div>
                             {pokemonAbility.map((ability, index) => (
                                 <div key={index}>
                                     <P >{ability.name} :</P>
-                                    {ability.effect_entries && ability.effect_entries[1].short_effect && (
+                                    {ability.effect_entries && ability.effect_entries[1] ? (
                                         <span>{ability.effect_entries[1].short_effect}</span>
+                                    ) : (
+                                        <span>Sorry, there is no description for this ability 🥹</span>
                                     )}
                                 </div>
                             ))}

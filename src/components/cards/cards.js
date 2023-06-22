@@ -3,6 +3,7 @@ import axios from "axios"
 import { Card } from "../card/card"
 import { styled } from "styled-components"
 import { Link } from "react-router-dom"
+import { Button } from "../button/button"
 
 
 const randomNums = (max) => {
@@ -29,13 +30,36 @@ const Cards = () => {
         fetchData()
     }, [])
 
+    const AddPokemons = ()=> {
+        function fetchNewPokemons() {
+            let endpoints = []
+
+            for (let i = 1; i <= 10; i++) {
+                endpoints.push(`https://pokeapi.co/api/v2/pokemon/${randomNums(1000)}/`)
+            }
+
+            axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+                (newPokemons) => setPokemons(newPokemons),
+            );
+
+            // const updetedPokemons = [...pokemons, ...newPokemons]
+
+            // setPokemons(updetedPokemons)
+        }
+
+        fetchNewPokemons()
+        
+        console.log(pokemons[0].data.name)
+    }
+
     return (
         <Section>
+            
             <Ul>
                 {pokemons.map((pokemon, index) => {
                     return (
-                        <Link to={`/pokemon-details/${pokemon.data.id}`}>
-                            <Card key={index} >
+                        <Link to={`/pokemon-details/${pokemon.data.id}`} key= {index}>
+                            <Card>
                                 <Img src={pokemon.data.sprites.front_default} alt={pokemon.data.name} />
                                 <P value={pokemon.data.name}>{pokemon.data.name}</P>
                             </Card>
@@ -43,6 +67,7 @@ const Cards = () => {
                     )
                 })}
             </Ul>
+            <Button func={AddPokemons}>Carregar Mais</Button>
         </Section >
     )
 }
@@ -51,6 +76,7 @@ const Section = styled('section')`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-color: #D4D9FD;
     min-height: 87vh;
     padding: 1rem;
