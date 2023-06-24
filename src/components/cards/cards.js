@@ -13,7 +13,7 @@ const randomNums = (max) => {
 const Cards = () => {
 
     const [pokemons, setPokemons] = useState([])
-
+    console.log(pokemons)
     useEffect(() => {
         function fetchData() {
             let endpoints = []
@@ -30,8 +30,9 @@ const Cards = () => {
         fetchData()
     }, [])
 
-    const AddPokemons = ()=> {
+    const AddPokemons = () => {
         function fetchNewPokemons() {
+
             let endpoints = []
 
             for (let i = 1; i <= 10; i++) {
@@ -39,26 +40,23 @@ const Cards = () => {
             }
 
             axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-                (newPokemons) => setPokemons(newPokemons),
+                (newPokemons) => setPokemons([...pokemons, ...newPokemons]),
             );
-
-            // const updetedPokemons = [...pokemons, ...newPokemons]
-
-            // setPokemons(updetedPokemons)
+    
         }
 
         fetchNewPokemons()
         
-        console.log(pokemons[0].data.name)
+        console.log(pokemons)
     }
 
     return (
         <Section>
-            
+
             <Ul>
                 {pokemons.map((pokemon, index) => {
                     return (
-                        <Link to={`/pokemon-details/${pokemon.data.id}`} key= {index}>
+                        <Link to={`/pokemon-details/${pokemon.data.id}`} key={index}>
                             <Card>
                                 <Img src={pokemon.data.sprites.front_default} alt={pokemon.data.name} />
                                 <P value={pokemon.data.name}>{pokemon.data.name}</P>
