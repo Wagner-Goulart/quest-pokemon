@@ -1,8 +1,10 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { NavBar } from "../components/navbar/navbar"
 import { styled } from "styled-components"
+import { ThemeContext } from "../contexts/theme-context"
+import { Footer } from "../components/footer/footer"
 
 
 const PokemonDetails = () => {
@@ -11,6 +13,7 @@ const PokemonDetails = () => {
     const [loading, setLoading] = useState(true)
     const [ability, setAbilities] = useState([])
     const [pokemonAbility, setPokemonAbilities] = useState([])
+    const { theme } = useContext(ThemeContext)
     const { id } = useParams()
 
 
@@ -66,9 +69,9 @@ const PokemonDetails = () => {
     return (
         <>
             <NavBar hideSelect />
-            <Section>
-                <Container>
-                    <PokeCard>
+            <Section theme={theme}>
+                <Container theme={theme}>
+                    <PokeCard >
                         <div>
                             {details.sprites && (
                                 <Img src={details.sprites.front_default} alt="Pokemon Sprite" />
@@ -104,6 +107,7 @@ const PokemonDetails = () => {
                     </PokeMoves>
                 </Container>
             </Section>
+            <Footer />
         </>
     )
 }
@@ -113,13 +117,14 @@ const Section = styled('section')`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #D4D9FD;
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.color };
     min-height: 87vh;
     padding: 1rem;
 `
 
 const Container = styled('div')`
-    background-color: #6D78C9;
+    background-color: ${props => props.theme.secundary};
     width: 500px;
     border-radius: 5px;
     text-transform: capitalize;
@@ -132,6 +137,7 @@ const PokeCard = styled('div')`
     text-align: center;
     gap: 2rem;
     margin-bottom: 3rem;
+    
 `
 const PokeMoves = styled('div')`
     text-align: center;

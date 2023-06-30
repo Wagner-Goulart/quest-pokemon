@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axios from "axios"
 import { Card } from "../card/card"
 import { styled } from "styled-components"
 import { Link } from "react-router-dom"
 import { Button } from "../button/button"
+import { ThemeContext } from "../../contexts/theme-context"
 
 
 const randomNums = (max) => {
@@ -13,7 +14,8 @@ const randomNums = (max) => {
 const Cards = () => {
 
     const [pokemons, setPokemons] = useState([])
-    console.log(pokemons)
+    const { theme } = useContext(ThemeContext)
+
     useEffect(() => {
         function fetchData() {
             let endpoints = []
@@ -47,36 +49,35 @@ const Cards = () => {
 
         fetchNewPokemons()
         
-        console.log(pokemons)
     }
 
     return (
-        <Section>
+        <Section theme={theme}>
 
-            <Ul>
+            <Ul theme={theme}>
                 {pokemons.map((pokemon, index) => {
                     return (
                         <Link to={`/pokemon-details/${pokemon.data.id}`} key={index}>
                             <Card>
                                 <Img src={pokemon.data.sprites.front_default} alt={pokemon.data.name} />
-                                <P value={pokemon.data.name}>{pokemon.data.name}</P>
+                                <P theme={theme} value={pokemon.data.name}>{pokemon.data.name}</P>
                             </Card>
                         </Link>
                     )
                 })}
             </Ul>
-            <Button func={AddPokemons}>Carregar Mais</Button>
+            <Button onClick={AddPokemons}>Carregar Mais</Button>
         </Section >
     )
 }
 
 const Section = styled('section')`
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    background-color: #D4D9FD;
-    min-height: 87vh;
+    background-color: ${props => props.theme.background};
+    /* height: 100vh; */
     padding: 1rem;
 `
 
@@ -85,7 +86,7 @@ const Ul = styled('ul')`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    background-color: #8896FC;
+    background-color: ${props => props.theme.primary};
     max-width: 1000px;
     gap: 3rem;
     padding: 1rem;
@@ -98,6 +99,7 @@ const Img = styled('img')`
 const P = styled('p')`
     font-weight: bolder;
     text-transform: capitalize;
+    color: ${props => props.theme.color };
     font-size: 1.2rem;
 
 `

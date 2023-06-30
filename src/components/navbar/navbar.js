@@ -1,12 +1,14 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
-import {useNavigate } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
+import { ThemeContext } from "../../contexts/theme-context"
+import { ThemeTogglerButton } from "../theme-toggler-button/theme-toggler-button"
 
 const NavBar = ({ hideSelect }) => {
 
     const [types, setTypes] = useState([])
-
+    const { theme } = useContext(ThemeContext)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -17,29 +19,40 @@ const NavBar = ({ hideSelect }) => {
     }, [])
 
     return (
-        <Section>
-                <Img src="/assets/logo-pokemon.png" alt="Logo do Pokemon" onClick={()=> navigate("/")}/>
-            {!hideSelect && (
-                <Select name="select">
-                    <Option value="all">Filter by Type</Option>
-                    {types.map((type, index) => {
-                        return (
-                            <Option key={index} value={type.name}>{type.name}</Option>
-                        )
-                    })}
-                </Select>
-            )}
+        <Section theme={theme}>
+            <StlyedDiv>
+                <Img src="/assets/logo-pokemon.png" alt="Logo do Pokemon" onClick={() => navigate("/")} />
+                {!hideSelect && (
+                    <Select name="select">
+                        <Option value="all">Filter by Type</Option>
+                        {types.map((type, index) => {
+                            return (
+                                <Option key={index} value={type.name}>{type.name}</Option>
+                            )
+                        })}
+                    </Select>
+                )}
+            </StlyedDiv>
+            <StlyedDiv>
+                <ThemeTogglerButton />
+            </StlyedDiv>
         </Section>
     )
 }
 
 const Section = styled.section`
     display: flex;
-    gap: 3rem;
+    justify-content: space-between;
     align-items: center;
-    background-color: #4b538b;
+    background-color: ${props => props.theme.primary};
     height: 80px;
     padding: 2rem;
+`
+const StlyedDiv = styled('div')`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
 `
 
 const Img = styled.img`

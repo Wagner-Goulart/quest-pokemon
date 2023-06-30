@@ -1,16 +1,21 @@
+import { useContext } from "react"
 import { styled } from "styled-components"
+import { ThemeContext } from "../../contexts/theme-context"
 
 const Card = ({children}) => {
+
+    const { theme } = useContext(ThemeContext)
+
     return (
-        <StyledCard>{children}</StyledCard>
+        <StyledCard theme={theme}>{children}</StyledCard>
     )
 }
 
 const StyledCard = styled('li')`
-    border: 1px solid #4B538B;
     text-align: center;
     cursor: pointer;
-    background-color: #6D78C9;
+    background-color: ${props => props.theme.secundary};
+    /* background-color: #6D78C9; */
     padding: 1rem;
     border-radius: 5px;
     width: 144px;

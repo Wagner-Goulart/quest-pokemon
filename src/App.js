@@ -1,13 +1,17 @@
-import { createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { AppRoutes } from "./pages/routes";
+import { ThemeProvider } from "./contexts/theme-context";
 
 function App() {
+
   return (
     <>
-      <GlobalStyles />
-      <AppRoutes />
+      <ThemeProvider>
+        <GlobalStyles />
+        <AppRoutes />
+      </ThemeProvider>
     </>
-   
+
   );
 }
 
@@ -27,6 +31,7 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
 `
 
 export default App;
