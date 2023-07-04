@@ -14,9 +14,7 @@ const StyledButton = styled('button') `
     border-radius: 10px;
     background-color: ${ props => props.theme.secundary};
     color: ${props => props.theme.color };
-    /* background-color: #8896FC; */
     border: none;
-    width: 180px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.3s;
@@ -24,6 +22,8 @@ const StyledButton = styled('button') `
         opacity: 0.9;
         transform: scale(1.07);
     }
+
+
 `
 
 export { Button }

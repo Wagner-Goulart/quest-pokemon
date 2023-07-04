@@ -5,7 +5,7 @@ export const themes = {
         primary: '#4b538b',
         secundary:'#6D78C9',
         color:"#000",
-        background: '#8896FC'
+        background: '#8896FC',
     },
 
     dark: {
