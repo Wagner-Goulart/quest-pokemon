@@ -11,26 +11,58 @@ const randomNums = (max) => {
     return Math.floor(Math.random() * max + 1)
 }
 
-const Cards = () => {
-
+const Cards = ({selectedType }) => {
     const [pokemons, setPokemons] = useState([])
+    const [randomPokemons, setRandonPokemons] = useState([])
     const { theme } = useContext(ThemeContext)
 
+    console.log(pokemons)
+
     useEffect(() => {
-        function fetchData() {
-            let endpoints = []
 
-            for (let i = 1; i <= 10; i++) {
-                endpoints.push(`https://pokeapi.co/api/v2/pokemon/${randomNums(1000)}/`)
-            }
-
-            axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-                (data) => setPokemons(data),
-            );
+        if (selectedType === 'all') {
+           setPokemons(randomPokemons)
+           return
         }
 
-        fetchData()
-    }, [])
+        if (selectedType) {
+            axios.get(`https://pokeapi.co/api/v2/type/${selectedType}`)
+                .then((type) => {
+                    const selectedTypePokemon = type.data.pokemon
+                    const endpoints = selectedTypePokemon.map((pokemon) => pokemon.pokemon.url)
+
+                    const requests = endpoints.map((endpoint)=> axios.get(endpoint))
+
+                    Promise.all(requests)
+                        .then((responses)=> {
+                            const updatedPokemons = responses.map((response)=>response)
+
+                            setPokemons(updatedPokemons)
+                        })
+                })
+        }else {
+            function fetchData() {
+                let endpoints = []
+
+                for (let i = 1; i <= 10; i++) {
+                    endpoints.push(`https://pokeapi.co/api/v2/pokemon/${randomNums(1000)}/`)
+                }
+
+                axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+                    (data) => {
+                        setPokemons(data)
+                        setRandonPokemons(data)
+                    } 
+                );
+
+                
+            }
+
+            fetchData()
+        }
+
+
+    }, [selectedType])
 
     const AddPokemons = () => {
         function fetchNewPokemons() {
@@ -44,11 +76,11 @@ const Cards = () => {
             axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
                 (newPokemons) => setPokemons([...pokemons, ...newPokemons]),
             );
-    
+
         }
 
         fetchNewPokemons()
-        
+
     }
 
     return (
@@ -99,7 +131,7 @@ const Img = styled('img')`
 const P = styled('p')`
     font-weight: bolder;
     text-transform: capitalize;
-    color: ${props => props.theme.color };
+    color: ${props => props.theme.color};
     font-size: 1.2rem;
 
 `

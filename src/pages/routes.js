@@ -4,7 +4,7 @@ import { PokemonDetails } from "./pokemon-details";
 
 
 const AppRoutes = () => {
-
+    
     return (
         <BrowserRouter>
             <Routes>

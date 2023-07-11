@@ -1,8 +1,9 @@
 import { Cards } from "../components/cards/cards"
 
-const PokemonsList = () => {
+const PokemonsList = ({selectedType}) => {
+    
     return <>
-        <Cards />
+        <Cards selectedType={selectedType} />
         
     </>
 }

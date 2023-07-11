@@ -101,8 +101,8 @@ const PokemonDetails = () => {
                     </PokeCard>
                     <PokeMoves>
                         <h1>Moves</h1>
-                        {details.moves.map((move) => {
-                            return <StyledSpan>{move.move.name} /</StyledSpan>
+                        {details.moves.map((move, index) => {
+                            return <StyledSpan key={index}>{move.move.name} /</StyledSpan>
                         })}
                     </PokeMoves>
                 </Container>
