@@ -5,6 +5,7 @@ import { styled } from "styled-components"
 import { Link } from "react-router-dom"
 import { Button } from "../button/button"
 import { ThemeContext } from "../../contexts/theme-context"
+import { Loader } from "../loader/loader"
 
 
 const randomNums = (max) => {
@@ -14,6 +15,7 @@ const randomNums = (max) => {
 const Cards = ({selectedType }) => {
     const [pokemons, setPokemons] = useState([])
     const [randomPokemons, setRandonPokemons] = useState([])
+    const [loading, setLoading] = useState(true)
     const { theme } = useContext(ThemeContext)
 
     console.log(pokemons)
@@ -26,6 +28,7 @@ const Cards = ({selectedType }) => {
         }
 
         if (selectedType) {
+            setLoading(true)
             axios.get(`https://pokeapi.co/api/v2/type/${selectedType}`)
                 .then((type) => {
                     const selectedTypePokemon = type.data.pokemon
@@ -38,6 +41,7 @@ const Cards = ({selectedType }) => {
                             const updatedPokemons = responses.map((response)=>response)
 
                             setPokemons(updatedPokemons)
+                            setLoading(false)
                         })
                 })
         }else {
@@ -52,6 +56,7 @@ const Cards = ({selectedType }) => {
                     (data) => {
                         setPokemons(data)
                         setRandonPokemons(data)
+                        setLoading(false)
                     } 
                 );
 
@@ -66,7 +71,7 @@ const Cards = ({selectedType }) => {
 
     const AddPokemons = () => {
         function fetchNewPokemons() {
-
+           
             let endpoints = []
 
             for (let i = 1; i <= 10; i++) {
@@ -74,13 +79,22 @@ const Cards = ({selectedType }) => {
             }
 
             axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-                (newPokemons) => setPokemons([...pokemons, ...newPokemons]),
+                (newPokemons) => {
+                    setPokemons([...pokemons, ...newPokemons])
+                    
+                }
             );
-
+            
         }
 
         fetchNewPokemons()
 
+    }
+    
+    if(loading) {
+        return (
+            < Loader />
+        )
     }
 
     return (

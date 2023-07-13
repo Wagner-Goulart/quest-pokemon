@@ -5,6 +5,7 @@ import { NavBar } from "../components/navbar/navbar"
 import { styled } from "styled-components"
 import { ThemeContext } from "../contexts/theme-context"
 import { Footer } from "../components/footer/footer"
+import { Loader } from "../components/loader/loader"
 
 
 const PokemonDetails = () => {
@@ -61,7 +62,8 @@ const PokemonDetails = () => {
         return (
             <>
                 <NavBar hideSelect />
-                <p>Estamos trabalhando nisso</p>
+                <Loader />
+                <Footer />
             </>
         )
     }
@@ -118,7 +120,7 @@ const Section = styled('section')`
     align-items: center;
     flex-direction: column;
     background-color: ${props => props.theme.background};
-    color: ${props => props.theme.color };
+    color: ${props => props.theme.color};
     min-height: 87vh;
     padding: 1rem;
 `
