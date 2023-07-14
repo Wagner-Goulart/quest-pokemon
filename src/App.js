@@ -3,12 +3,12 @@ import { AppRoutes } from "./pages/routes";
 import { ThemeProvider } from "./contexts/theme-context";
 
 function App() {
- 
+
   return (
     <>
       <ThemeProvider>
         <GlobalStyles />
-        <AppRoutes />
+          <AppRoutes />
       </ThemeProvider>
     </>
 

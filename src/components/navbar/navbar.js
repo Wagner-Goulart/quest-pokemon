@@ -1,22 +1,32 @@
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { styled } from "styled-components"
+import { Section, StlyedDiv, StyledImg, StyledSelect, StyledOption } from "./navbarStyles"
 import { ThemeContext } from "../../contexts/theme-context"
 import { ThemeTogglerButton } from "../theme-toggler-button/theme-toggler-button"
+
 
 const NavBar = ({ hideSelect, setSelectedType }) => {
 
     const [types, setTypes] = useState([])
-   
     const { theme } = useContext(ThemeContext)
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get('https://pokeapi.co/api/v2/type/')
+   
+        const fetchTypes = ()=> {
+            axios.get('https://pokeapi.co/api/v2/type/')
             .then((types) => {
-                setTypes(types.data.results)
+                setTypes(types.data.results ?? [])
             })
+            .catch((erro) => {
+                console.log('Erro na requisão', erro)
+                alert('A wild error appears! Please try again later.')
+            })
+        }
+
+        fetchTypes()
+
     }, [])
 
     const handleTypeChange = (e) => {
@@ -24,40 +34,19 @@ const NavBar = ({ hideSelect, setSelectedType }) => {
         setSelectedType(selectedType)
     }
 
-
-    // useEffect(() => {
-    //     if (selectedType === 'all') {
-    //         return
-    //     }
-
-    //     if (selectedType) {
-    //         axios.get(`https://pokeapi.co/api/v2/type/${selectedType}`)
-    //             .then((type) => {
-    //                 const filteredPokemons = type.data.pokemon.map((pokemon) => {
-    //                     return {
-    //                         name: pokemon.pokemon.name,
-    //                         url: pokemon.pokemon.url,
-    //                     }
-    //                 })
-    //             })
-    //     }
-    // }, [selectedType])
-
-    
-
     return (
         <Section theme={theme}>
             <StlyedDiv>
-                <Img src="/assets/logo-pokemon.png" alt="Logo do Pokemon" onClick={() => navigate("/")} />
+                <StyledImg src='/assets/logo-pokemon.png' alt='Logo do Pokemon' onClick={() => navigate('/')} />
                 {!hideSelect && (
-                    <Select name="select" onChange={handleTypeChange}>
-                        <Option value="all">Filter by Type</Option>
-                        {types.map((type, index) => {
+                    <StyledSelect name='select' onChange={handleTypeChange}>
+                        <StyledOption value='all'>Filter by Type</StyledOption>
+                        {types.map(({name}, index) => {
                             return (
-                                <Option key={index} value={type.name}>{type.name}</Option>
+                                <StyledOption key={index} value={name}>{name}</StyledOption>
                             )
                         })}
-                    </Select>
+                    </StyledSelect>
                 )}
             </StlyedDiv>
             <StlyedDiv>
@@ -66,39 +55,5 @@ const NavBar = ({ hideSelect, setSelectedType }) => {
         </Section>
     )
 }
-
-const Section = styled.section`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: ${props => props.theme.primary};
-    height: 80px;
-    padding: 2rem;
-`
-const StlyedDiv = styled('div')`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 3rem;
-`
-
-const Img = styled.img`
-    width: 70px;
-    cursor: pointer;
-    
-`
-const Select = styled.select`
-   padding: 10px;
-   border-radius: 5px;
-   background: transparent;
-   color: #ffff;
-   border: 2px solid #FFF;
-   cursor: pointer;
- `
-
-const Option = styled.option`
-   text-transform: capitalize;
-   color: #000;
-`
 
 export { NavBar }

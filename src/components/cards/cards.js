@@ -18,7 +18,6 @@ const Cards = ({selectedType }) => {
     const [loading, setLoading] = useState(true)
     const { theme } = useContext(ThemeContext)
 
-    console.log(pokemons)
 
     useEffect(() => {
 
