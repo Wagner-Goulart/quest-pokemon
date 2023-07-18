@@ -1,8 +1,7 @@
 import { useContext } from "react"
-import { styled } from "styled-components"
+import { StyledDiv } from "./loaderStyles"
 import { ThemeContext, themes } from "../../contexts/theme-context"
 import { ThreeDots } from 'react-loader-spinner'
-
 
 const Loader = () => {
 
@@ -25,14 +24,6 @@ const Loader = () => {
     )
 }
 
-const StyledDiv = styled('div')`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: calc(100vh - 127px);
-    background-color: ${props => props.theme.background};
-    color: ${props => props.theme.color};
-`
+
 
 export { Loader }

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { styled } from "styled-components"
+import { StyledFooter } from "./footerStyles"
 import { ThemeContext } from "../../contexts/theme-context"
 
 const Footer = () => {
@@ -8,20 +8,11 @@ const Footer = () => {
 
     return (
         <StyledFooter theme={theme}>
-            <span>Feito por Wagner Goulart</span>
+            <a href="https://github.com/Wagner-Goulart" target="_blank">Feito por Wagner Goulart</a>
         </StyledFooter>
     )
 }
 
-const StyledFooter = styled('footer')`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${props => props.theme.primary};
-    color: ${props => props.theme.color };
-    padding: 5px;
-    height: 48px;
-`
 
 export { Footer }
 
