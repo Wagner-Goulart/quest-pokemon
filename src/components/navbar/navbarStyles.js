@@ -14,10 +14,15 @@ const StlyedDiv = styled('div')`
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
+
 `
 const StyledImg = styled('img')`
     width: 70px;
     cursor: pointer;
+
+    @media (max-width:480px) {
+        display: none;
+    }
     
 `
 const StyledSelect = styled('select')`
@@ -28,6 +33,10 @@ const StyledSelect = styled('select')`
    border: 2px solid #FFF;
    cursor: pointer;
    font-family: 'Poppins', sans-serif;
+
+   @media (max-width:480px) {
+        font-size: 16px;
+    }
  `
 
 const StyledOption = styled('option')`

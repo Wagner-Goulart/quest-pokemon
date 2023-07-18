@@ -18,5 +18,13 @@ const StyledButton = styled('button') `
         transform: scale(1.07);
     }
 
+    @media (max-width:480px) {
+        font-size: 16px;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    
+
+
 `
 export { StyledButton }

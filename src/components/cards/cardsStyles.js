@@ -18,6 +18,7 @@ const Ul = styled('ul')`
     gap: 3rem;
     padding: 1rem;
     border-radius: 5px;
+
 `
 
 const Img = styled('img')`
@@ -31,7 +32,5 @@ const P = styled('p')`
     color: ${props => props.theme.color};
     font-size: 1rem;
     overflow: hidden;
-
 `
-
 export { Section, Ul, Img, P }

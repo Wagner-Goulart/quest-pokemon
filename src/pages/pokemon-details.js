@@ -17,7 +17,6 @@ const PokemonDetails = () => {
     const { theme } = useContext(ThemeContext)
     const { id } = useParams()
 
-
     useEffect(() => {
         function fetchData() {
 
@@ -89,16 +88,21 @@ const PokemonDetails = () => {
 
                         </div>
                         <div>
-                            {pokemonAbility.map((ability, index) => (
-                                <div key={index}>
-                                    <P >{ability.name} :</P>
-                                    {ability.effect_entries && ability.effect_entries[1] ? (
-                                        <span>{ability.effect_entries[1].short_effect}</span>
-                                    ) : (
-                                        <span>Sorry, there is no description for this ability 🥹</span>
-                                    )}
-                                </div>
-                            ))}
+                            {pokemonAbility.map((ability, index) => {
+
+                                const { name, effect_entries } = ability
+                                return (
+                                    <div key={index}>
+                                        <P >{name} :</P>
+                                        {effect_entries && effect_entries[1] ? (
+                                            <span>{effect_entries[1].short_effect}</span>
+                                        ) : (
+                                            <span>Sorry, there is no description for this ability 🥹</span>
+                                        )}
+                                    </div>
+
+                                )
+                            })}
                         </div>
                     </PokeCard>
                     <PokeMoves>

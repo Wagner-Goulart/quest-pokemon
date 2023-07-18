@@ -18,6 +18,7 @@ export const ThemeTogglerButton = () =>{
 const StyledSunIcon = styled(FaSun)`
     color: #FAF13E;
     font-size: 1.5rem;
+
 `
 
 const StyledMoonIcon = styled(FaMoon)`
