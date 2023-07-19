@@ -17,6 +17,8 @@ const PokemonDetails = () => {
     const { theme } = useContext(ThemeContext)
     const { id } = useParams()
 
+    const { sprites, name, types } = details
+
     useEffect(() => {
         function fetchData() {
 
@@ -74,16 +76,16 @@ const PokemonDetails = () => {
                 <Container theme={theme}>
                     <PokeCard >
                         <div>
-                            {details.sprites && (
-                                <Img src={details.sprites.front_default} alt="Pokemon Sprite" />
+                            {sprites && (
+                                <Img src={sprites.front_default} alt="Pokemon Sprite" />
                             )}
 
-                            {details.name && <h2>{details.name}</h2>}
+                            {name && <h2>{name}</h2>}
 
-                            {details.types && details.types.length > 1 ? (
-                                <span>{details.types[0].type.name} | {details.types[1].type.name}</span>
+                            {types && types.length > 1 ? (
+                                <span>{types[0].type.name} | {types[1].type.name}</span>
                             ) : (
-                                <span>{details.types && details.types[0].type.name}</span>
+                                <span>{types && types[0].type.name}</span>
                             )}
 
                         </div>
@@ -91,6 +93,7 @@ const PokemonDetails = () => {
                             {pokemonAbility.map((ability, index) => {
 
                                 const { name, effect_entries } = ability
+
                                 return (
                                     <div key={index}>
                                         <P >{name} :</P>
@@ -107,8 +110,8 @@ const PokemonDetails = () => {
                     </PokeCard>
                     <PokeMoves>
                         <h1>Moves</h1>
-                        {details.moves.map((move, index) => {
-                            return <StyledSpan key={index}>{move.move.name} /</StyledSpan>
+                        {details.moves.map(({ move }, index) => {
+                            return <StyledSpan key={index}>{move.name} /</StyledSpan>
                         })}
                     </PokeMoves>
                 </Container>
@@ -135,6 +138,10 @@ const Container = styled('div')`
     border-radius: 5px;
     text-transform: capitalize;
     padding: 1rem;
+
+    @media (max-width:480px) {
+        width: 90%;
+    }
 `
 const PokeCard = styled('div')`
     display: flex;
@@ -143,6 +150,10 @@ const PokeCard = styled('div')`
     text-align: center;
     gap: 2rem;
     margin-bottom: 3rem;
+
+    @media (max-width:480px) {
+        flex-direction: column;
+    }
     
 `
 const PokeMoves = styled('div')`
@@ -151,6 +162,10 @@ const PokeMoves = styled('div')`
 
 const Img = styled('img')`
     width: 150px;
+
+    @media (max-width:480px) {
+        width: 200px;
+    }
 `
 const P = styled('p')`
     font-weight: bold;
