@@ -1,4 +1,23 @@
-# Getting Started with Create React App
+# Projeto PokeDex
+
+Projeto realizar para o curso DeQuest. Simula uma pokedex, onde o usuário tem acesso informação dos pokemons.
+
+* Criado consumindo a [PokeAPI](https://pokeapi.co/)
+
+## Funcionalidade aplicadas.
+
+* ThemeSwitcher para troca de temas (Light / Dark);
+* Select contentdo os tipo de pokemon, ao selecionar um tipo o usuário tem acesso a todos os pokemon do tipo selecionado;
+
+## Ferramentas utilizadas
+
+* Axio;
+* Styled-components;
+* React-router-dom;
+* React-icon;
+* React-spinners
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
