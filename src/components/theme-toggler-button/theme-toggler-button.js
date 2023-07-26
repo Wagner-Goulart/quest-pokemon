@@ -8,9 +8,16 @@ import { styled } from "styled-components"
 export const ThemeTogglerButton = () =>{
     const {theme, setTheme} = useContext(ThemeContext)
 
+    const toggleTheme = () => {
+   
+        const newTheme = theme ===  themes.light ? themes.dark : themes.light
+
+        setTheme(newTheme)
+    }
+
     return (
-        <Button onClick={()=> setTheme(theme === themes.light ? themes.dark : themes.light)}>
-            {theme === themes.light ? <StyledSunIcon /> : <StyledMoonIcon />}
+        <Button onClick={()=> toggleTheme()}>
+            {theme === themes.light ? 'light': 'dark'} 
         </Button>
     )
 }
