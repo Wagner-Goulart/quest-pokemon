@@ -21,31 +21,62 @@ export const themes = {
     }
 }
 
-const saveThemePreference = (theme) => {
-   localStorage.setItem("theme", JSON.stringify(theme))
+export const ThemeContext = createContext({});
   
-}
-
-const getThemePreference = () => {
-    
-    const storageTheme = JSON.parse(localStorage.getItem("theme"))
-    return storageTheme ? storageTheme : themes.light
-
-}
-
-export const ThemeContext = createContext({})
-
-export const ThemeProvider = (props) => {
-    
-    const [theme, setTheme] = useState(getThemePreference())
-
+  const getThemePreference = () => {
+    try {
+      const storedTheme = JSON.parse(localStorage.getItem("theme"));
+      return Object.values(themes).find((theme) => theme.name === storedTheme?.name) || themes.light;
+      
+    } catch (error) {
+      console.error("Alguma coisa deu errado.", error);
+      return themes.light;
+    }
+  };
+  
+  export const ThemeProvider = ({ children }) => {
+    const [theme, setTheme] = useState(getThemePreference());
+  
+    const saveThemePreference = (theme) => {
+      localStorage.setItem("theme", JSON.stringify(theme));
+    };
+  
     useEffect(() => {
-        saveThemePreference(theme)
-    }, [theme])
-
+      saveThemePreference(theme);
+    }, [theme]);
+  
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-            {props.children}
-        </ThemeContext.Provider>
-    )
-}
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    );
+  };
+
+// const saveThemePreference = (theme) => {
+//    localStorage.setItem("theme", JSON.stringify(theme))
+  
+// }
+
+// const getThemePreference = () => {
+    
+//     const storageTheme = JSON.parse(localStorage.getItem("theme"))
+//     return storageTheme ? storageTheme : themes.light
+
+// }
+
+// export const ThemeContext = createContext({})
+
+// export const ThemeProvider = (props) => {
+    
+//     const [theme, setTheme] = useState(getThemePreference())
+
+//     useEffect(() => {
+//         saveThemePreference(theme)
+//     }, [theme])
+
+//     return (
+//         <ThemeContext.Provider value={{ theme, setTheme }}>
+//             {props.children}
+//         </ThemeContext.Provider>
+//     )
+// }

@@ -17,7 +17,7 @@ export const ThemeTogglerButton = () =>{
 
     return (
         <Button onClick={()=> toggleTheme()}>
-            {theme === themes.light ? 'light': 'dark'} 
+            {theme === themes.light ? <StyledSunIcon />: <StyledMoonIcon />} 
         </Button>
     )
 }

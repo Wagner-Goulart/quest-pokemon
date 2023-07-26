@@ -8,5 +8,9 @@ const StyledFooter = styled('footer')`
     color: ${props => props.theme.color };
     padding: 5px;
     height: 48px;
+
+    a {
+        color: ${props => props.theme.color };
+    }
 `
 export { StyledFooter }
