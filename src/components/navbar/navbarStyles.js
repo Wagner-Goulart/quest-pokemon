@@ -7,6 +7,11 @@ const Section = styled('section')`
     background-color: ${props => props.theme.primary};
     height: 80px;
     padding: 2rem;
+
+    @media (max-width:480px) {
+        justify-content: center;
+        gap: 10px;
+    }
 `
 
 const StlyedDiv = styled('div')`
@@ -20,9 +25,9 @@ const StyledImg = styled('img')`
     width: 70px;
     cursor: pointer;
 
-    @media (max-width:480px) {
+    /* @media (max-width:480px) {
         display: none;
-    }
+    } */
     
 `
 const StyledSelect = styled('select')`
