@@ -1,21 +1,27 @@
-# Projeto PokeDex
+# Projeto PokeDex 
 
-Projeto realizar para o curso DeQuest. Simula uma pokedex, onde o usuário tem acesso informação dos pokemons.
+![Alt text](image.png)
+
+Projeto realizado para o curso DevQuest. Simula uma pokedex, onde o usuário tem acesso informação dos pokemons.
 
 * Criado consumindo a [PokeAPI](https://pokeapi.co/)
 
-## Funcionalidade aplicadas.
+## Funcionalidade aplicadas. 🚀🚀
 
 * ThemeSwitcher para troca de temas (Light / Dark);
 * Select contentdo os tipo de pokemon, ao selecionar um tipo o usuário tem acesso a todos os pokemon do tipo selecionado;
 
-## Ferramentas utilizadas
+## Ferramentas utilizadas 🔧🔧
 
-* Axio;
-* Styled-components;
-* React-router-dom;
-* React-icon;
-* React-spinners
+* ✅ Axios;
+* ✅ Styled-components;
+* ✅ React-router-dom;
+* ✅ React-icon;
+* ✅ React-spinners
+
+## Visite o site na Vercel: 🌏🌎🌍
+
+* [Pokedex](https://quest-pokemon.vercel.app/)
 
 ## Getting Started with Create React App
 
