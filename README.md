@@ -1,6 +1,6 @@
 # Projeto PokeDex 
 
-![Alt text](image.png)
+![Alt text](./public/assets/image.png)
 
 Projeto realizado para o curso DevQuest. Simula uma pokedex, onde o usuário tem acesso informação dos pokemons.
 
